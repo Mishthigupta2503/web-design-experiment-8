@@ -1,7 +1,6 @@
 const express = require('express');
 
 const app = express();
-const PORT = 3000;
 
 // Middleware to read JSON data
 app.use(express.json());
@@ -68,6 +67,12 @@ app.delete('/books/:id', (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.send('Book Collection API is running! Visit /books to view all books.');
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on port ${PORT}`);
 });
